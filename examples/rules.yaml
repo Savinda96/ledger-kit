@@ -1,0 +1,79 @@
+# LedgerKit Classification Rules
+version: "1.0"
+description: "LedgerKit Classification Rules"
+
+rules:
+  # High priority specific rules
+  - name: "GCash Service Fee"
+    priority: 100
+    enabled: true
+    conditions:
+      description: "(?i)gcash.*(fee|charge)"
+      amount:
+        max: 100
+    accounts:
+      debit: "6300"  # Bank Fees
+      credit: "1100" # Cash in Bank
+    confidence: 0.95
+    rationale: "GCash transaction fees are small amounts with fee/charge keywords"
+
+  - name: "ATM Withdrawal"
+    priority: 90
+    enabled: true
+    conditions:
+      description: "(?i)(atm|withdrawal)"
+      counterparty: "(?i)(atm|bank)"
+    accounts:
+      debit: "1000"  # Cash on Hand  
+      credit: "1100" # Cash in Bank
+    confidence: 0.90
+    rationale: "ATM withdrawals transfer money from bank to cash"
+
+  - name: "Salary Payment"
+    priority: 85
+    enabled: true
+    conditions:
+      description: "(?i)(salary|payroll|wages)"
+      amount:
+        min: 10000
+    accounts:
+      debit: "6200"  # Salaries Expense
+      credit: "1100" # Cash in Bank  
+    confidence: 0.92
+    rationale: "Salary payments are typically larger regular amounts"
+
+  # Medium priority category rules
+  - name: "Office Supplies"
+    priority: 70
+    enabled: true
+    conditions:
+      description: "(?i)(office|supplies|stationery)"
+      amount:
+        max: 5000
+    accounts:
+      debit: "6100"  # Office Supplies Expense
+      credit: "1100" # Cash in Bank
+    confidence: 0.80
+    rationale: "Office supplies are typically smaller expense amounts"
+
+  - name: "Utility Bills"
+    priority: 75
+    enabled: true
+    conditions:
+      description: "(?i)(electric|water|internet|phone|utility)"
+    accounts:
+      debit: "6400"  # Utilities Expense
+      credit: "1100" # Cash in Bank
+    confidence: 0.85
+    rationale: "Utility bill payments for business operations"
+
+  # Fallback rule - MUST be last and lowest priority
+  - name: "Uncategorized"
+    priority: 1
+    enabled: true
+    conditions: {}  # Matches everything
+    accounts:
+      debit: "9999"  # Uncategorized Account
+      credit: "1100" # Cash in Bank
+    confidence: 0.10
+    rationale: "Fallback rule for transactions that don't match any other rules"

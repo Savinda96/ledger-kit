@@ -1,0 +1,13 @@
+date,amount,description,counterparty,reference,source
+2024-01-01,-50.00,GCash Service Fee,GCash,FEE2024001,bank_import
+2024-01-02,-2000.00,ATM Withdrawal,BPI ATM,ATM240102,bank_import
+2024-01-03,-25000.00,Salary Payment - John Doe,John Doe,SAL202401,payroll
+2024-01-04,-1500.00,Office Supplies - Stationery,National Bookstore,OS240104,manual
+2024-01-05,-3200.00,Electric Bill Payment,Meralco,ELEC202401,manual
+2024-01-06,-850.00,Internet Bill,PLDT,INT202401,manual
+2024-01-07,-5000.00,Office Rent,Building Owner,RENT202401,manual
+2024-01-08,-300.00,Bank Transfer Fee,BPI,XFER240108,bank_import
+2024-01-09,50000.00,Service Revenue - Client A,Client A,INV240109,manual
+2024-01-10,-12000.00,Equipment Purchase,Tech Store,EQ240110,manual
+2024-01-11,-800.00,Marketing - Social Media Ads,Facebook,ADS240111,manual
+2024-01-12,-2500.00,Professional Services - Legal,Law Firm,LEG240112,manual
